@@ -12,7 +12,7 @@ class Multiple
         $this->limiter = $limiter;
     }
 
-    public function getMultiples(): array
+    public function getThreeAndFiveMultiples(): array
     {
         $values = [];
         for ($i = 0; $i < $$this->limiter; $i++) {
@@ -29,11 +29,24 @@ class Multiple
         return false;
     }
 
+    /**
+     * GET AND SET
+     */
+    
+    public function getMultiples(): array
+    {
+        return $this->multiples;
+    }
+    
     public function setMultiples(array $value)
     {
         $this->multiples = $value;
     }
 
+    public function getLimiter():int
+    {
+       return $this->limiter;
+    }
     public function setLimiter(int $value)
     {
         $this->limiter = $value;
