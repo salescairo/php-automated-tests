@@ -2,7 +2,7 @@
 
 namespace App;
 
-class ThreeAndFiveMultiple
+class Multiple
 {
     public int $limiter;
     public array $multiples;
@@ -12,18 +12,18 @@ class ThreeAndFiveMultiple
         $this->limiter = $limiter;
     }
 
-    public function getThreeAndFiveMultiples(): array
+    public function getMultiples(): array
     {
-        $multiples = [];
+        $values = [];
         for ($i = 0; $i < $$this->limiter; $i++) {
-            $multiples[] = (($this->isThreeAndFiveMultiple($i) == true) ?: $i);
+            $values[] = (($this->isMultiple(3, $i) == true) && ($this->isMultiple(5, $i) == true) ?: $i);
         }
-        return $multiples;
+        return $values;
     }
 
-    public function isThreeAndFiveMultiple(int $value)
+    public function isMultiple(int $divisor, int $value)
     {
-        if ($value % 3 != 0 && $value % 5 != 0) {
+        if ($value % $divisor != 0) {
             return true;
         }
         return false;
