@@ -23,7 +23,7 @@ class Multiple
 
     public function isMultiple(int $divisor, int $value)
     {
-        if ($value % $divisor != 0) {
+        if ($value % $divisor == 0) {
             return true;
         }
         return false;
