@@ -1,0 +1,16 @@
+{
+    "name": "cairo.filho/automated-tests",
+    "description": "Tests With PHP",
+    "autoload": {
+        "psr-4": {
+            "App\\": "src/App"
+        }
+    },
+    "authors": [
+        {
+            "name": "Cairo Filho"
+        }
+    ],
+    "minimum-stability": "beta",
+    "require": {}
+}
