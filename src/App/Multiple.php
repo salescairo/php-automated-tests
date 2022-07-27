@@ -27,7 +27,7 @@ class Multiple
     {
         $values = [];
         for ($i = 1; $i < $this->limiter; $i++) {
-            if ($this->isMultiple(3, $i) == true || $this->isMultiple(5, $i) == true) {
+            if ($this->isThreeOrFiveMultiple($i) == true) {
                 $values[] = $i;
             }
         }
@@ -38,11 +38,26 @@ class Multiple
     {
         $values = [];
         for ($i = 1; $i < $this->limiter; $i++) {
-            if (($this->isMultiple(3, $i) == true || $this->isMultiple(5, $i) == true) &&  $this->isMultiple(7, $i) == true) {
+            if ($this->isThreeOrFiveAndSevenMultiple($i) == true) {
                 $values[] = $i;
             }
         }
         return $values;
+    }
+
+    public function isThreeOrFiveMultiple($value):bool
+    {
+        if ($this->isMultiple(3, $value) == true || $this->isMultiple(5, $value) == true) {
+           return true;
+        }
+        return false;
+    }
+    public function isThreeOrFiveAndSevenMultiple($value):bool
+    {
+        if (($this->isMultiple(3, $value) == true || $this->isMultiple(5, $value) == true) &&  $this->isMultiple(7, $value) == true) {
+           return true;
+        }
+        return false;
     }
 
     public function getThreeAndFiveMultiplesSum(): int
