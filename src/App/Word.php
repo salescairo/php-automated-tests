@@ -2,7 +2,7 @@
 
 namespace App;
 
-class Word
+class Word extends Number
 {
     public array $singular = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'];
     public array $plural =   ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
@@ -25,29 +25,45 @@ class Word
     public function getWordSizeCollection($words): array
     {
         $collection = [];
-        foreach ($words as $word) {
-            $collection[] = $this->getWordSize($word);
+        foreach ($words as $key => $value) {
+            $collection[] = $this->getWordSize($value);
         }
         return $collection;
     }
 
-    public function getWordSize($word)
+    public function getWordSize($word):int
     {
-        $sum = 0;
-        foreach ($this->getWordCollections($word) as $key => $value) {
-            $sum += $this->getValueLetter($value, $this->getLetterCollection($value));
+        $values  = [];
+        foreach($this->getWordCollections($word) as $key => $value){
+            $values[] = ($this->getValueLetter($value)+1);
         }
-        return $sum;
+        return array_sum($values);
     }
 
     public function getWordCollections($word): array
     {
-        return array_map('strval', str_split($word));
+        $collection =  array_map('strval', str_split($word));
+        return $this->clearCollection($collection);
+    }
+    
+    public function clearCollection($collection):array
+    {
+        $newCollection = [];
+        $words = array_merge($this->singular,$this->plural);
+        foreach($collection as $key => $value){
+            if(in_array($value,array_values($words))==true){
+               $newCollection[]=$value;
+            }
+        }
+        
+        return $newCollection;
     }
 
-    public function getValueLetter($letter, $collection): int
+    public function getValueLetter($letter): int
     {
-        return (array_search($letter, $collection) + 1);
+        $collection = $this->getLetterCollection($letter);
+        $search = array_search($letter, $collection);
+        return $search;
     }
 
     public function getLetterCollection($letter): array
@@ -64,5 +80,36 @@ class Word
             return false;
         }
         return true;
+    }
+
+
+    public function getWordPrimeNumbers($words): array
+    {
+        $sizes = [];
+        $word = new Word();
+        foreach ($word->getWordSizeCollection($word->getCollection($words)) as $key => $value) {
+            $sizes[] =  ($this->isPrimeNumber($value)) ? true : false;
+        }
+        return $sizes;
+    }
+    public function getWordHappyNumbers($words): array
+    {
+        $sizes = [];
+        $word = new Word();
+        $happyNumber = new HappyNumber();
+        foreach ($word->getWordSizeCollection($word->getCollection($words)) as $key => $value) {
+            $sizes[] =  ($happyNumber->isHappyNumber($value)) ? true : false;
+        }
+        return $sizes;
+    }
+    public function getWordThirdOrFiveMultiples($words): array
+    {
+        $sizes = [];
+        $word = new Word();
+        $multiple = new Multiple();
+        foreach ($word->getWordSizeCollection($word->getCollection($words)) as $key => $value) {
+           $sizes[] =  ($multiple->isThreeOrFiveMultiple($value)) ? true :false;
+        }
+        return $sizes;
     }
 }

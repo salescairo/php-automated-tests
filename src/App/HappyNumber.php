@@ -2,7 +2,6 @@
 
 namespace App;
 
-use SebastianBergmann\Environment\Console;
 
 class HappyNumber
 {

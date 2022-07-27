@@ -3,8 +3,6 @@
 namespace tests\Unit;
 
 use App\HappyNumber;
-use App\Multiple;
-use App\Number;
 use App\Word;
 use PHPUnit\Framework\TestCase;
 
@@ -25,12 +23,12 @@ class WordNumberTest extends TestCase
     public function test_lower_word_size_verification()
     {
         $word = new Word();
-        $this->assertEquals($word->getWordSize('cad'),8);
+        $this->assertEquals($word->getWordSize('2aba'),4);
     }
     public function test_upper_word_size_verification()
     {
         $word = new Word();
-        $this->assertEquals($word->getWordSize('DAC'),8);
+        $this->assertEquals($word->getWordSize('ADABE'),13);
     }
     
 
@@ -45,20 +43,20 @@ class WordNumberTest extends TestCase
 
     public function test_word_size_coversion_is_not_happy_number()
     {
-        $number = new Number();
-        $this->assertEquals($number->getWordPrimeNumbers('aacb bbba eb'),[true,true,true]);
+        $word = new Word();
+        $this->assertEquals($word->getWordPrimeNumbers('aacb bbba eb'),[true,true,true]);
     }
     
     public function test_word_size_coversion_is_prime_number()
     {
-        $number = new Number();
-        $this->assertEquals($number->getWordPrimeNumbers('aacb bbba eb'),[true,true,true]);
+        $word = new Word();
+        $this->assertEquals($word->getWordPrimeNumbers('aacb bbba eb'),[true,true,true]);
     }
 
     public function test_word_size_coversion_is_three_or_five_multiple()
     {
-        $number = new Number();
-        $this->assertEquals($number->getWordThirdOrFiveMultiples('jjj eee je ja'),[true,true,true,false]);
+        $word = new Word();
+        $this->assertEquals($word->getWordThirdOrFiveMultiples('jjj eee je ja'),[true,true,true,false]);
     }
     
 
