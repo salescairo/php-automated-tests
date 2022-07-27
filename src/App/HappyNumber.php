@@ -3,7 +3,7 @@
 namespace App;
 
 
-class HappyNumber
+class HappyNumber extends Number
 {
     public array $histories = [];
     public array $digits;
@@ -13,17 +13,16 @@ class HappyNumber
     {
         $status = false;
         while ($value != 1 && $this->isRepeated($value) == false) {
-            $value = $this->getSunNumbers($value);
+            $value = $this->getSumNumbers($value);
         }
         ($value != 1) ?: $status = true;
         return $status;
     }
 
-    public function getSunNumbers(int $number): int
+    public function getSumNumbers(int $number): int
     {
         $total = 0;
-        $digits = array_map('intval', str_split($number));
-        foreach ($digits as $item => $value) {
+        foreach ($this->toArray($number) as $item => $value) {
             $total += ($value * $value);
         }
         $this->addHistory($number);
@@ -32,10 +31,7 @@ class HappyNumber
 
     public function isRepeated($number): bool
     {
-        if (array_search($number, $this->getHistories()) != null) {
-            return true;
-        }
-        return false;
+       return ((array_search($number, $this->getHistories()) != null) ? true : false);
     }
 
     public function addHistory($value): void

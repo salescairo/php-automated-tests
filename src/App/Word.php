@@ -10,13 +10,9 @@ class Word extends Number
 
     public function getCollectionSize($words): int
     {
-        $size = 0;
-        $wordSize = $this->getWordSizeCollection($this->getCollection($words));
-        foreach ($wordSize as $key => $value) {
-            $size += $value;
-        }
-        return $size;
+       return $this->getTotal($this->getWordSizeCollection($this->getCollection($words)));
     }
+
     public function getCollection($words):array
     {
         return explode(' ', $words);
@@ -92,6 +88,7 @@ class Word extends Number
         }
         return $sizes;
     }
+
     public function getWordHappyNumbers($words): array
     {
         $sizes = [];
@@ -102,6 +99,7 @@ class Word extends Number
         }
         return $sizes;
     }
+    
     public function getWordThirdOrFiveMultiples($words): array
     {
         $sizes = [];

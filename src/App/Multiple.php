@@ -2,7 +2,7 @@
 
 namespace App;
 
-class Multiple
+class Multiple extends Number
 {
     public int $limiter;
     public array $multiples;
@@ -16,9 +16,7 @@ class Multiple
     {
         $values = [];
         for ($i = 1; $i < $this->limiter; $i++) {
-            if ($this->isMultiple(3, $i) == true && $this->isMultiple(5, $i) == true) {
-                $values[] = $i;
-            }
+            (($this->isMultiple(3, $i) && $this->isMultiple(5, $i)) == false) ?: $values[] = $i;
         }
         return $values;
     }
@@ -27,9 +25,7 @@ class Multiple
     {
         $values = [];
         for ($i = 1; $i < $this->limiter; $i++) {
-            if ($this->isThreeOrFiveMultiple($i) == true) {
-                $values[] = $i;
-            }
+            ($this->isThreeOrFiveMultiple($i) == false) ?: $values[] = $i;
         }
         return $values;
     }
@@ -38,82 +34,19 @@ class Multiple
     {
         $values = [];
         for ($i = 1; $i < $this->limiter; $i++) {
-            if ($this->isThreeOrFiveAndSevenMultiple($i) == true) {
-                $values[] = $i;
-            }
+            ($this->isThreeOrFiveAndSevenMultiple($i) == false) ?: $values[] = $i;
         }
         return $values;
     }
 
-    public function isThreeOrFiveMultiple($value):bool
+    public function isThreeOrFiveMultiple($value): bool
     {
-        if ($this->isMultiple(3, $value) == true || $this->isMultiple(5, $value) == true) {
-           return true;
-        }
-        return false;
-    }
-    public function isThreeOrFiveAndSevenMultiple($value):bool
-    {
-        if (($this->isMultiple(3, $value) == true || $this->isMultiple(5, $value) == true) &&  $this->isMultiple(7, $value) == true) {
-           return true;
-        }
-        return false;
+        return (($this->isMultiple(3, $value) || $this->isMultiple(5, $value)) ? true : false);
     }
 
-    public function getThreeAndFiveMultiplesSum(): int
+    public function isThreeOrFiveAndSevenMultiple($value): bool
     {
-        $total = 0;
-        foreach($this->getThreeAndFiveMultiples() as $key => $value) {
-            $total += $value;
-        }
-        return $total;
+        return ($this->isThreeOrFiveMultiple($value) &&  $this->isMultiple(7, $value) ? true : false);
     }
 
-    public function getThreeOrFiveMultiplesSum(): int
-    {
-        $total = 0;
-        foreach($this->getThreeOrFiveMultiples() as $key => $value) {
-            $total += $value;
-        }
-        return $total;
-    }
-    public function getThreeOrFiveAndSevenMultiplesSum(): int
-    {
-        $total = 0;
-        foreach($this->getThreeOrFiveAndSevenMultiples() as $key => $value) {
-            $total += $value;
-        }
-        return $total;
-    }
-
-    public function isMultiple(int $divisor, int $value)
-    {
-        if ($value % $divisor == 0) {
-            return true;
-        }
-        return false;
-    }
-
-    /**
-     * GET AND SET
-     */
-
-    public function getMultiples(): array
-    {
-        return $this->multiples;
-    }
-
-    public function setMultiples(array $value)
-    {
-        $this->multiples = $value;
-    }
-
-    public function getLimiter(): int
-    {
-        return $this->limiter;
-    }
-    public function setLimiter(int $value)
-    {
-        $this->limiter = $value;
-    }
 }
