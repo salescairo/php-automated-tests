@@ -17,37 +17,32 @@ class MultipleTest extends TestCase
     public function test_values_multiples()
     {
         $multiple = new Multiple(10);
-        $threeAndFive = $multiple->getThreeOrFiveMultiples();
-        $this->assertEquals(array_diff([3,5,6,9],$threeAndFive),[]);
+        $this->assertEquals(array_diff([3,5,6,9],$multiple->getThreeOrFiveMultiples()),[]);
     }
     
 
     public function test_count_third_and_five_value_multiples()
     {
         $multiple = new Multiple(1000);
-        $threeAndFive = $multiple->getThreeAndFiveMultiples();
-        $this->assertEquals(count($threeAndFive),66);
+        $this->assertEquals(count($multiple->getThreeAndFiveMultiples()),66);
     }
     public function test_sum_third_and_five_values_multiples()
     {
         $multiple = new Multiple(16);
-        $total = $multiple->getThreeAndFiveMultiplesSum();
-        $this->assertEquals($total,15);
+        $this->assertEquals($multiple->getTotal($multiple->getThreeAndFiveMultiples()),15);
     }
 
 
     public function test_count_third_or_five_value_multiples()
     {
         $multiple = new Multiple(1000);
-        $threeAndFive = $multiple->getThreeOrFiveMultiples();
-        $this->assertEquals(count($threeAndFive),466);
+        $this->assertEquals(count($multiple->getThreeOrFiveMultiples()),466);
     }
 
     public function test_sum_third_or_five_values_multiples()
     {
         $multiple = new Multiple(10);
-        $total = $multiple->getThreeOrFiveMultiplesSum();
-        $this->assertEquals($total,23);
+        $this->assertEquals($multiple->getTotal($multiple->getThreeOrFiveMultiples()),23);
     }
 
 
@@ -55,14 +50,12 @@ class MultipleTest extends TestCase
     public function test_count_third_or_five_and_seven_value_multiples()
     {
         $multiple = new Multiple(80);
-        $threeAndFive = $multiple->getThreeOrFiveAndSevenMultiples();
-        $this->assertEquals(count($threeAndFive),5);
+        $this->assertEquals(count($multiple->getThreeOrFiveAndSevenMultiples()),5);
     }
 
     public function test_sum_third_or_five_and_seven_values_multiples()
     {
         $multiple = new Multiple(80);
-        $total = $multiple->getThreeOrFiveAndSevenMultiplesSum();
-        $this->assertEquals($total,231);
+        $this->assertEquals($multiple->getTotal($multiple->getThreeOrFiveAndSevenMultiples()),231);
     }
 }
