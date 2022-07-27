@@ -1,0 +1,8 @@
+vendor/*
+.gitignore
+*.log
+*.md
+*.key
+*.cache
+composer.lock
+README.md
